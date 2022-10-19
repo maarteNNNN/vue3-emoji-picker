@@ -1,11 +1,8 @@
 <template>
+  {{ store.state.options }}
   <picker-root
     :type="type"
     :text="input"
-    :additional-groups="additionalGroups"
-    :group-order="groupOrder"
-    :group-icons="groupIcons"
-    :group-names="groupNames"
     @select="$emit('select', $event)"
     @update:text="onChangeText"
   />
@@ -120,6 +117,7 @@ export default defineComponent({
     /**
      * Initializing initial props
      */
+    console.log(props)
     store.updateOptions({
       native: props.native,
       hideSearch: props.hideSearch,
@@ -132,6 +130,8 @@ export default defineComponent({
       disableSkinTones: props.disableSkinTones,
       disableRecent: props.disableRecent,
       additionalGroups: props.additionalGroups,
+      groupOrder: props.groupOrder,
+      groupIcons: props.groupIcons,
       mode: props.mode,
       offset: props.offset,
     })
@@ -149,6 +149,7 @@ export default defineComponent({
       type: props.pickerType,
       input,
       onChangeText,
+      store,
     }
   },
 })

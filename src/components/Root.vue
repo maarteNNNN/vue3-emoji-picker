@@ -40,17 +40,8 @@
     </div>
   </div>
   <div v-else class="v3-emoji-picker">
-    <Header
-      :group-names="groupNames"
-      :additional-groups="additionalGroups"
-      :group-icons="groupIcons"
-      :group-order="groupOrder"
-    />
-    <Body
-      :additional-groups="additionalGroups"
-      :group-order="groupOrder"
-      @select="onSelect"
-    />
+    <Header />
+    <Body />
     <Footer />
   </div>
 </template>
@@ -86,22 +77,6 @@ export default defineComponent({
     text: {
       type: String,
       default: '',
-    },
-    additionalGroups: {
-      type: Object,
-      default: () => ({}),
-    },
-    groupOrder: {
-      type: Array,
-      default: () => [],
-    },
-    groupIcons: {
-      type: Object,
-      default: () => ({}),
-    },
-    groupNames: {
-      type: Object,
-      default: () => ({}),
     },
   },
   emits: ['update:text', 'select'],

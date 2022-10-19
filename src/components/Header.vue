@@ -47,25 +47,7 @@ import recent from '../svgs/groups/recent.svg'
 
 export default defineComponent({
   name: 'Header',
-  props: {
-    additionalGroups: {
-      type: Object,
-      default: () => ({}),
-    },
-    groupOrder: {
-      type: Array,
-      default: () => [],
-    },
-    groupIcons: {
-      type: Object,
-      default: () => ({}),
-    },
-    groupNames: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
-  setup(props) {
+  setup() {
     const { state, updateSearch, updateActiveGroup } = inject('store') as Store
 
     const hasSearch = computed(() => !state.options.hideSearch)
@@ -81,17 +63,17 @@ export default defineComponent({
 
     let groups = [
       ...state.groups,
-      ...Object.keys(props.additionalGroups).map((g) => ({
+      ...Object.keys(state.options.additionalGroups).map((g) => ({
         key: g,
-        title: props.groupNames[g]
-          ? props.groupNames[g]
+        title: state.options.groupNames[g]
+          ? state.options.groupNames[g]
           : snakeToCapitalizedCase(g),
       })),
     ]
 
-    if (props.groupOrder.length) {
+    if (state.options.groupOrder.length) {
       groups = groups.sort((a, b) =>
-        sortGroupOrder(a.key, b.key, props.groupOrder as string[])
+        sortGroupOrder(a.key, b.key, state.options.groupOrder as string[])
       )
     }
 
@@ -111,7 +93,7 @@ export default defineComponent({
         objects,
         symbols,
         flags,
-        ...props.groupIcons,
+        ...state.options.groupIcons,
         recent,
       } as Record<string, string>,
     }

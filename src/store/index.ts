@@ -68,52 +68,52 @@ export default function Store(): Store {
     }
 
     // Setup additional groups
-    setupAdditionalGroups()
+    // setupAdditionalGroups()
   }
 
-  /**
-   * Setup user defined additional groups
-   */
-  function setupAdditionalGroups() {
-    const groups = state.options.additionalGroups
-    let finalGroups = {} as EmojiRecord
+  // /**
+  //  * Setup user defined additional groups
+  //  */
+  // function setupAdditionalGroups() {
+  //   const groups = state.options.additionalGroups
+  //   let finalGroups = {} as EmojiRecord
 
-    // exit if invalid groups.
-    if (!Array.isArray(groups) || !groups.length) return
+  //   // exit if invalid groups.
+  //   if (!Array.isArray(groups) || !groups.length) return
 
-    for (let group of groups) {
-      // group key validation.
-      if (!group.key) {
-        console.error(`additionalGroups: Group key is required.`)
-        continue
-      }
+  //   for (let group of groups) {
+  //     // group key validation.
+  //     if (!group.key) {
+  //       console.error(`additionalGroups: Group key is required.`)
+  //       continue
+  //     }
 
-      if (groupKeys.includes(group.key)) {
-        console.error(
-          `additionalGroups: Please don't use reserved keys. Reserved keys are: ${groupKeys}`
-        )
-        continue
-      }
+  //     if (groupKeys.includes(group.key)) {
+  //       console.error(
+  //         `additionalGroups: Please don't use reserved keys. Reserved keys are: ${groupKeys}`
+  //       )
+  //       continue
+  //     }
 
-      // group title validation
-      if (!group.title) {
-        console.error(`additionalGroups: Group title is required.`)
-        continue
-      }
+  //     // group title validation
+  //     if (!group.title) {
+  //       console.error(`additionalGroups: Group title is required.`)
+  //       continue
+  //     }
 
-      // group emojis validation
-      if (!Array.isArray(group.emojis) || !group.emojis.length) {
-        console.error(`additionalGroups: Invalid or empty emojis.`)
-        continue
-      }
+  //     // group emojis validation
+  //     if (!Array.isArray(group.emojis) || !group.emojis.length) {
+  //       console.error(`additionalGroups: Invalid or empty emojis.`)
+  //       continue
+  //     }
 
-      finalGroups = Object.assign({}, finalGroups, {
-        [group.key]: group.emojis as Emoji[],
-      })
-    }
+  //     finalGroups = Object.assign({}, finalGroups, {
+  //       [group.key]: group.emojis as Emoji[],
+  //     })
+  //   }
 
-    state.additionalGroups = finalGroups
-  }
+  //   state.additionalGroups = finalGroups
+  // }
 
   async function getRecent() {
     let recent = await getRecentEmojis()
@@ -170,6 +170,7 @@ export default function Store(): Store {
    * @param options
    */
   const updateOptions = (options: Record<string, any>) => {
+    // console.trace(toRaw(state.options))
     state.options = Object.assign(state.options, options)
 
     // Picker is ready 🎉
